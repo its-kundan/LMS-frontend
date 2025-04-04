@@ -1,10 +1,11 @@
 import { ArcElement, BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title,Tooltip } from "chart.js";
 import { useEffect } from "react";
 import { Bar, Pie } from "react-chartjs-2";
-import { BsCollectionPlayFill, BsPerson, BsTrash } from "react-icons/bs";
+// import { BsCollectionPlayFill, BsPerson, BsTrash } from "react-icons/bs";
 import {FaUsers} from "react-icons/fa";
-import { LuBarChart } from "react-icons/lu";
+// import { LuBarChart } from "react-icons/lu";
 
+// import { LuBarChart } from "react-icons/lu";
 import { GiMoneyStack } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -195,13 +196,13 @@ function AdminDashboard() {
                                         className="bg-green-500 hover:bg-green-600 transition-all ease-in-out duration-300 text-xl py-2 px-4 rounded-md font-bold"
                                         onClick={() => navigate("/course/displaylectures", {state: {...course}})}
                                     >
-                                        <BsCollectionPlayFill />
+                                        {/* <BsCollectionPlayFill /> */}
                                     </button>
                                     <button
                                         className="bg-red-500 hover:bg-red-600 transition-all ease-in-out duration-300 text-xl py-2 px-4 rounded-md font-bold"
                                         onClick={() => onCourseDelete(course?._id)}
                                     >
-                                        <BsTrash />
+                                        {/* <BsTrash /> */}
                                     </button>
                                 </td>
                             </tr>

@@ -1,22 +1,22 @@
 
 
-import Ravi from '../Assets/Ravi.jpg'
-import amit from '../Assets/amit.jpg'
+import ritesh from '../Assets/ritesh.png'
+import shubham from '../Assets/shubham.png'
 import anuj from '../Assets/anuj.jpg'
-import Ajay from '../Assets/Ajay.jpg'
-import gaurav from '../Assets/gaurav.jpg'
+import sunny from '../Assets/sunny.png'
+import abhishek from '../Assets/abhishek.png'
 
 export const celebrities = [
     {
-        title: "Amit Maurya",
+        title: "Ritesh Kumar",
         description: "SWE3 @Google,Intern@InternPe",
-        image: amit,
+        image: ritesh,
         slideNumber: 1
     },
     {
-        title: "Ravi Kishan",
-        description: "SWE1 @Microsoft,Intern@InternPe",
-        image: Ravi,
+        title: "Shubham Kumar",
+        description: "SWE1 @fiber",
+        image: shubham,
         slideNumber: 2
     },
     {
@@ -26,15 +26,15 @@ export const celebrities = [
         slideNumber: 3
     },
     {
-        title: "Gaurav Singh",
-        description: "SWE1 @Flipcart,Intern @InternPe",
-        image: gaurav ,
+        title: "Abhishek Kumar Varma",
+        description: "SWE1 @Cisco,Intern @Cisco",
+        image: abhishek ,
         slideNumber: 4
     },
     {
-        title: "Ajap Prakash",
-        description: "SWE2 @Google,Intern@InternPe",
-        image: Ajay,
+        title: "Sunny Kumar",
+        description: "DA,Intern@Phonepe",
+        image: sunny,
         slideNumber: 5
     },
 ]

@@ -3,7 +3,7 @@ import { BsFacebook, BsInstagram, BsLinkedin, BsTwitterX } from 'react-icons/bs'
 import { MdEmail } from "react-icons/md";
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link,useNavigate } from 'react-router-dom';
-import pappuNavLogo from '../Assets/pappuNavLogo.jpg'
+import kundan from '../Assets/kundan.jpg'
 import { BsArrowUp } from "react-icons/bs";
 function Footer() {
     const currentDate = new Date();
@@ -48,20 +48,20 @@ function Footer() {
                         <img 
                          onClick={()=> navigate('/')}
                         className='rounded-full w-[50px] py-1 cursor-pointer'
-                        src={pappuNavLogo} alt="logo" />
+                        src={kundan} alt="logo" />
 
                   <div>
                         {/* <!-- Social Media Icons --> */}
                         <div className=" flex-wrap flex justify-center items-center text-xl md:text-2xl gap-1">
-                            <NavLink to='https://github.com/pappukr034/' className="text-white rounded-full p-1 duration-500 hover:bg-black">
+                            <NavLink to='https://github.com/its-kundan/' className="text-white rounded-full p-1 duration-500 hover:bg-black">
                             <BsFacebook />
                             </NavLink>
 
-                            <NavLink to='https://www.instagram.com/_pappu_1108?igsh=MTJtMmpzdW51OTg5Ng==' className="text-white mr-4  rounded-full p-1 duration-500 hover:bg-pink-500">
+                            <NavLink to='https://www.instagram.com/curious_kundan' className="text-white mr-4  rounded-full p-1 duration-500 hover:bg-pink-500">
                             <BsInstagram />
                             </NavLink>
 
-                            <NavLink to='https://www.linkedin.com/in/pappu034/' className="text-white mr-4  rounded-full p-1 duration-500 hover:bg-blue-500 cursor-pointer">
+                            <NavLink to='https://www.linkedin.com/in/its-kundan/' className="text-white mr-4  rounded-full p-1 duration-500 hover:bg-blue-500 cursor-pointer">
                             <BsLinkedin />
                             </NavLink>
                             
@@ -74,7 +74,7 @@ function Footer() {
                     </div>
                     <a 
                     className=' text-gray-200 text-base mt-1'
-                    href="mailto:pappukr034@gmail.com">Email us : pappukr034@gmail.com</a>
+                    href="mailto:kundan51kk@gmail.com">Email us : kundan51kk@gmail.com</a>
                     <p className=" text-white">
                     <span className=' text-orange-500 font-medium text-2xl leading-2 space-x-1'>SkillRise</span> is dedicated to providing the best online education experience. Our courses are designed by industry experts to ensure you gain the skills needed to excel in your career.
                     </p>
@@ -112,15 +112,15 @@ function Footer() {
                        <MdEmail />
                         <a 
                     className=' text-gray-200 hover:text-orange-400 duration-300 text-base mt-1'
-                    href="mailto:pappukr034@gmail.com">Email us : pappukr034@gmail.com</a>
+                    href="mailto:kundan51kk@gmail.com">Email us : kundan51kk@gmail.com</a>
                     </div>
-                    <div className=' flex justify-start items-start gap-2'>
-                        <BiPhone />
-                        <li>Phone: 7667384500</li>
-                    </div>
+                    {/* <div className=' flex justify-start items-start gap-2'> */}
+                        {/* <BiPhone /> */}
+                        {/* <li>Phone: 7667384500</li> */}
+                    {/* </div> */}
                     <div className=' flex justify-start items-start gap-2'>
                         <BiSolidLocationPlus />
-                        <li>Address: Vaishali, BIHAR</li>
+                        <li>Address: Nalanda, BIHAR</li>
                     </div>
                     </ul>
                 </div>
