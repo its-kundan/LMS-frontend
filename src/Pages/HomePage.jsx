@@ -130,7 +130,7 @@ function HomePage() {
             </div>
 
             {/* Instructors Section */}
-            <div className="relative py-16">
+            <div className="relative py-16 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
@@ -144,7 +144,7 @@ function HomePage() {
                     <div className="section-bg p-8">
                         <Swiper
                             spaceBetween={30}
-                            centeredSlides={true}
+                            slidesPerView={1}
                             autoplay={{
                                 delay: 3000,
                                 disableOnInteraction: false,
@@ -158,18 +158,23 @@ function HomePage() {
                             breakpoints={{
                                 640: {
                                     slidesPerView: 1,
+                                    spaceBetween: 20,
                                 },
                                 768: {
                                     slidesPerView: 2,
+                                    spaceBetween: 30,
                                 },
                                 1024: {
                                     slidesPerView: 3,
+                                    spaceBetween: 30,
                                 },
                             }}
                         >
                             {instructorData.map((instructor, index) => (
                                 <SwiperSlide key={index}>
-                                    <InstructorDetails data={instructor} />
+                                    <div className="h-full">
+                                        <InstructorDetails data={instructor} />
+                                    </div>
                                 </SwiperSlide>
                             ))}
                         </Swiper>

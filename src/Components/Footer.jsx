@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BsFacebook, BsInstagram, BsLinkedin, BsTwitterX, BsArrowUp } from 'react-icons/bs';
+import { BsFacebook, BsInstagram, BsLinkedin, BsTwitterX, BsArrowUp, BsGithub } from 'react-icons/bs';
 import { FiMail, FiPhone, FiMapPin, FiHeart } from 'react-icons/fi';
 
 function Footer() {
@@ -34,10 +34,9 @@ function Footer() {
     }, []);
 
     const socialLinks = [
-        { icon: <BsFacebook className="w-5 h-5" />, href: 'https://github.com/pappukr034/', color: 'hover:bg-blue-600' },
-        { icon: <BsInstagram className="w-5 h-5" />, href: 'https://www.instagram.com/_pappu_1108?igsh=MTJtMmpzdW51OTg5Ng==', color: 'hover:bg-pink-600' },
-        { icon: <BsLinkedin className="w-5 h-5" />, href: 'https://www.linkedin.com/in/pappu034/', color: 'hover:bg-blue-700' },
-        { icon: <BsTwitterX className="w-5 h-5" />, href: 'https://www.youtube.com/', color: 'hover:bg-black' },
+        { icon: <BsGithub className="w-5 h-5" />, href: 'https://github.com/its-kundan', color: 'hover:bg-gray-800' },
+        { icon: <BsLinkedin className="w-5 h-5" />, href: 'https://www.linkedin.com/in/kundan-kumar-51kk/', color: 'hover:bg-blue-700' },
+        { icon: <BsTwitterX className="w-5 h-5" />, href: 'https://twitter.com/kundan51kk', color: 'hover:bg-black' },
     ];
 
     const quickLinks = [
@@ -138,10 +137,10 @@ function Footer() {
                                     <div>
                                         <p className="text-sm text-neutral-400">Email</p>
                                         <a 
-                                            href="mailto:pappukr034@gmail.com"
+                                            href="mailto:kundan51kk@gmail.com"
                                             className="text-neutral-300 hover:text-primary-400 transition-colors duration-300"
                                         >
-                                            pappukr034@gmail.com
+                                            kundan51kk@gmail.com
                                         </a>
                                     </div>
                                 </div>
@@ -152,7 +151,7 @@ function Footer() {
                                     </div>
                                     <div>
                                         <p className="text-sm text-neutral-400">Phone</p>
-                                        <span className="text-neutral-300">+91 7667384500</span>
+                                        <span className="text-neutral-300">+91 766 788 6894</span>
                                     </div>
                                 </div>
                                 
@@ -161,8 +160,8 @@ function Footer() {
                                         <FiMapPin className="w-4 h-4 text-primary-400" />
                                     </div>
                                     <div>
-                                        <p className="text-sm text-neutral-400">Address</p>
-                                        <span className="text-neutral-300">Vaishali, BIHAR</span>
+                                        <p className="text-sm text-neutral-400">Location</p>
+                                        <span className="text-neutral-300">Gurugram, India</span>
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +174,15 @@ function Footer() {
                             <div className="text-neutral-400 text-sm">
                                 © {year} SkillRise. All rights reserved. Made with{' '}
                                 <FiHeart className="inline w-4 h-4 text-red-500 fill-current" />
-                                {' '}for learners worldwide.
+                                {' '}by{' '}
+                                <a 
+                                    href="https://github.com/its-kundan" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="text-primary-400 hover:text-primary-300 transition-colors duration-300"
+                                >
+                                    Kundan Kumar
+                                </a>
                             </div>
                             <div className="flex items-center space-x-6 text-sm">
                                 <Link to="/privacy-policy" className="text-neutral-400 hover:text-primary-400 transition-colors duration-300">
