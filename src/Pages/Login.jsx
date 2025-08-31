@@ -2,132 +2,213 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { FiMail, FiLock, FiEye, FiEyeOff, FiUser, FiArrowRight } from 'react-icons/fi';
 
 import HomeLayout from '../Layouts/HomeLayout';
 import { login } from '../Redux/Slices/AuthSlice';
-import { LuCrown } from "react-icons/lu";
 
-function Signup() {
-
+function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [loginData, setLoginData] = useState({
         email: "",
         password: "",
-        isChaked:false,
+        isChaked: false,
     });
 
+    const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
     function handleUserInput(e) {
-        const {name, value} = e.target;
+        const { name, value, type, checked } = e.target;
         setLoginData({
             ...loginData,
-            [name]: value
-        })
+            [name]: type === 'checkbox' ? checked : value
+        });
     }
 
     async function onLogin(event) {
         event.preventDefault();
-        if(!loginData.email || !loginData.password || loginData.isChaked) {
+        if (!loginData.email || !loginData.password) {
             toast.error("Please fill all the details");
             return;
         }
 
+        setIsLoading(true);
         
-        // dispatch create account action
-        const response = await dispatch(login(loginData));
-
-        console.log("Response : ",response)
-        
-        if((response?.payload?.success)==true){
-            console.log("Nagivate to Home page")
-            setLoginData({
-                email: "",
-                password: "",
-                isChaked:false
-            });
-            navigate('/')
+        try {
+            const response = await dispatch(login(loginData));
+            
+            if (response?.payload?.success) {
+                setLoginData({
+                    email: "",
+                    password: "",
+                    isChaked: false
+                });
+                toast.success("Login successful!");
+                navigate('/');
+            }
+        } catch (error) {
+            toast.error("Login failed. Please try again.");
+        } finally {
+            setIsLoading(false);
         }
     }
 
     return (
         <HomeLayout>
-        <div className='flex flex-col items-center justify-center bg-red-100  bg-gradient-to-tl from-slate-950 to-slate-700 px-2 py-6'>
-                <div className=' mt-8'>
-                    <h2 className=' text-3xl text-lime-300'>Hello, <br /> </h2>
-                    <h1 className=' text-5xl text-lime-600 font-bold'>Welcome ! </h1>
+            <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-md w-full space-y-8">
+                    {/* Header */}
+                    <div className="text-center">
+                        <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center mb-6">
+                            <FiUser className="w-8 h-8 text-white" />
+                        </div>
+                        <h2 className="text-3xl font-display font-bold text-gray-900 mb-2">
+                            Welcome back
+                        </h2>
+                        <p className="text-gray-600">
+                            Sign in to your account to continue learning
+                        </p>
+                    </div>
+
+                    {/* Login Form */}
+                    <div className="form-modern">
+                        <form onSubmit={onLogin} className="space-y-6">
+                            {/* Email Field */}
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                                    Email address
+                                </label>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <FiMail className="h-5 w-5 text-gray-400" />
+                                    </div>
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        autoComplete="email"
+                                        required
+                                        className="input-modern pl-10 w-full"
+                                        placeholder="Enter your email"
+                                        value={loginData.email}
+                                        onChange={handleUserInput}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Password Field */}
+                            <div>
+                                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                                    Password
+                                </label>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <FiLock className="h-5 w-5 text-gray-400" />
+                                    </div>
+                                    <input
+                                        id="password"
+                                        name="password"
+                                        type={showPassword ? "text" : "password"}
+                                        autoComplete="current-password"
+                                        required
+                                        className="input-modern pl-10 pr-10 w-full"
+                                        placeholder="Enter your password"
+                                        value={loginData.password}
+                                        onChange={handleUserInput}
+                                    />
+                                    <button
+                                        type="button"
+                                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        {showPassword ? (
+                                            <FiEyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                                        ) : (
+                                            <FiEye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Remember Me & Forgot Password */}
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center">
+                                    <input
+                                        id="rememberMe"
+                                        name="isChaked"
+                                        type="checkbox"
+                                        className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                                        checked={loginData.isChaked}
+                                        onChange={handleUserInput}
+                                    />
+                                    <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-700">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <div className="text-sm">
+                                    <button
+                                        type="button"
+                                        onClick={() => navigate('/forgot-password')}
+                                        className="font-medium text-primary-600 hover:text-primary-500 transition-colors duration-300"
+                                    >
+                                        Forgot password?
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Submit Button */}
+                            <div>
+                                <button
+                                    type="submit"
+                                    disabled={isLoading}
+                                    className="btn-premium w-full flex items-center justify-center space-x-2 py-3 text-lg"
+                                >
+                                    {isLoading ? (
+                                        <div className="spinner w-5 h-5"></div>
+                                    ) : (
+                                        <>
+                                            <span>Sign in</span>
+                                            <FiArrowRight className="w-5 h-5" />
+                                        </>
+                                    )}
+                                </button>
+                            </div>
+
+                            {/* Sign Up Link */}
+                            <div className="text-center">
+                                <p className="text-sm text-gray-600">
+                                    Don't have an account?{' '}
+                                    <Link
+                                        to="/signup"
+                                        className="font-medium text-primary-600 hover:text-primary-500 transition-colors duration-300"
+                                    >
+                                        Sign up
+                                    </Link>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+
+                    {/* Additional Info */}
+                    <div className="text-center">
+                        <p className="text-xs text-gray-500">
+                            By signing in, you agree to our{' '}
+                            <Link to="/TermsAndConditions" className="text-primary-600 hover:text-primary-500">
+                                Terms of Service
+                            </Link>{' '}
+                            and{' '}
+                            <Link to="/privacy-policy" className="text-primary-600 hover:text-primary-500">
+                                Privacy Policy
+                            </Link>
+                        </p>
+                    </div>
                 </div>
-           <div className=' rounded-md mt-8 w-full flex flex-col md:flex-row'>
-               <div className=' md:w-1/2'>
-                    <img
-                     className=' w-full rounded-tl-md rounded-tr-md'
-                     src="https://images.pexels.com/photos/5647660/pexels-photo-5647660.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-                </div>
-                <form noValidate onSubmit={onLogin} className='flex flex-col justify-center gap-3 p-4 text-white  shadow-[0_0_10px_black] w-full rounded-bl-md rounded-br-md md:w-1/2'>
-                    <div>
-                       <LuCrown className=' text-2xl text-lime-400' />
-                       <h1 className=' text-xl font-bold mt-1'>Welcome back !</h1>
-                    </div>
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="email" className='font-semibold'> Email<sup className=' text-red-500 mt-2'>*</sup> </label>
-                        <input 
-                            type="email" 
-                            required
-                            name="email"
-                            id="email"
-                            placeholder="Enter your email.."
-                            className=" py-3 px-2 text-[18px] border-none outline-none focus:ring-1 focus:duration-300"
-                            onChange={handleUserInput}
-                            value={loginData.email}
-                        />
-                    </div>
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="password" className='font-semibold'> Password <sup className=' text-red-500 mt-2'>*</sup> </label>
-                        <input 
-                            type="password" 
-                            required
-                            name="password"
-                            id="password"
-                            placeholder="Enter your password.."
-                            className=" py-3 px-2 text-[18px] border-none outline-none focus:ring-1 focus:duration-300"
-                            onChange={handleUserInput}
-                            value={loginData.password}
-                        />
-                    </div>
-
-                    <div className=' flex justify-between px-3 items-center underline py-1 text-lime-300 cursor-pointer duration-300'>
-                    <div  className=' flex gap-2 items-center'>
-                        <input
-                         placeholder=''
-                         className=' cursor-pointer'
-                         type="checkbox" 
-                         name="rememberMe" 
-                         id="rememberMe" 
-                         onChange={handleUserInput}
-                         value={loginData.isChaked}
-                         />
-                        <label htmlFor="rememberMe">remember me</label>
-                    </div>
-                    <div
-                     onClick={()=> navigate('/forgot-password')}
-                    className=' hover:text-lime-400 text-lime-300 flex gap-2 items-center'>
-                       Forgot Your Password
-                    </div>
-                    </div>
-
-                    <button type="submit" className='mt-2 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold text-lg text-black cursor-pointer bg-gradient-to-tr from-yellow-400 to-lime-400 hover:bg-gradient-to-tr hover:from-lime-400 hover:to-yellow-400'>
-                       Login
-                    </button>
-
-                    <p className="text-center">
-                        Don't hanve an account ? <Link to="/signup" className='link mt-2 text-yellow-400 cursor-pointer'> Signup</Link>
-                    </p>
-
-                </form>
             </div>
-      </div>
         </HomeLayout>
     );
 }
 
-export default Signup;
+export default Login;

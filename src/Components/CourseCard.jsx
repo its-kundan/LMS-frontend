@@ -2,56 +2,111 @@ import { useNavigate } from "react-router-dom";
 import { BiSolidVideos } from "react-icons/bi";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { BsBarChart } from "react-icons/bs";
-
-
+import { FiClock, FiUser, FiStar } from "react-icons/fi";
 
 function CourseCard({ data }) {
     const navigate = useNavigate();
 
-    // console.log("data ",data)
-
     return (
         <div
-            onClick={() => navigate("/course/description", {state: {...data}})} 
-            className="text-white bg-slate-900 w-[20rem] h-[450px] shadow-sm rounded-lg shadow-gray-500 cursor-pointer group  border border-gray-500 overflow-hidden hover:bg-gradient-to-tr hover:from-slate-900 hover:to-slate-700 hover:duration-300">
-            <div className="overflow-hidden p-2 ">
-                <img 
-                    className="h-48 w-full rounded-tl-lg rounded-tr-lg group-hover:scale=[1,2] transition-all ease-in-out diration-300 hover:scale-105"
-                    src={data?.thumbnail?.secure_url}
-                    alt="course thumbnail"
-                />
-                <div className="p-3 space-y-1 ">
-                    <h2 className="text-2xl font-bold line-clamp-2 text-gray-200 mt-2">
-                        {data?.title}
-                    </h2>
-                    <div className=" py-2 flex justify-between items-center">
-                        <p className="font-semibold flex justify-center items-center gap-4">
-                            <span className="text-yellow-500 font-bold"><BiSolidCategoryAlt className=" text-2xl" />
-                            </span>
-                            <span>{data?.category}</span>
-                        </p>
-                        <p className="font-semibold flex justify-center items-center gap-4 ">
-                            <span className="font-bold text-yellow-500 "><BiSolidVideos className=" text-2xl" />
-                            </span>
-                            <span>{data?.numberOfLectures}</span>
-                        </p>
+            onClick={() => navigate("/course/description", { state: { ...data } })}
+            className="group cursor-pointer"
+        >
+            <div className="card-hover bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100">
+                {/* Course Image */}
+                <div className="relative overflow-hidden">
+                    <img
+                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                        src={data?.thumbnail?.secure_url}
+                        alt="course thumbnail"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    {/* Premium Badge */}
+                    <div className="absolute top-4 left-4">
+                        <span className="premium-badge">
+                            Premium
+                        </span>
                     </div>
-                        <p className="font-semibold">
-                            <span className="text-yellow-500 font-bold">Instructor : </span>
-                            {data?.createdBy}
-                        </p>
-                    <div className=" py-1">
-                        <p className=" flex gap-2 justify-start items-center mb-4">
-                          <BsBarChart className=" rounded-full bg-yellow-500 text-4xl text-white" />
-                          Beginner to Advance
-                        </p>
-                    <button className=" bg-yellow-400 hover:bg-yellow-600 duration-300 text-white px-4 py-2 rounded-lg mr-2 mb-2 lg:mb-0  lg:text-xl w-full">
-                        Explore courses
-                   </button>
+                    
+                    {/* Rating */}
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center space-x-1">
+                        <FiStar className="w-4 h-4 text-gold-500 fill-current" />
+                        <span className="text-sm font-semibold text-gray-700">4.8</span>
                     </div>
                 </div>
-            </div>
 
+                {/* Course Content */}
+                <div className="p-6">
+                    {/* Category */}
+                    <div className="flex items-center space-x-2 mb-3">
+                        <div className="w-2 h-2 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full"></div>
+                        <span className="text-sm font-medium text-primary-600 uppercase tracking-wide">
+                            {data?.category}
+                        </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-xl font-display font-bold text-gray-800 mb-3 line-clamp-2 group-hover:text-primary-600 transition-colors duration-300">
+                        {data?.title}
+                    </h3>
+
+                    {/* Instructor */}
+                    <div className="flex items-center space-x-2 mb-4">
+                        <div className="w-6 h-6 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full flex items-center justify-center">
+                            <FiUser className="w-3 h-3 text-white" />
+                        </div>
+                        <span className="text-sm text-gray-600">
+                            {data?.createdBy}
+                        </span>
+                    </div>
+
+                    {/* Course Stats */}
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                        <div className="flex items-center space-x-2">
+                            <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center">
+                                <BiSolidVideos className="w-4 h-4 text-primary-600" />
+                            </div>
+                            <div>
+                                <div className="text-sm font-semibold text-gray-800">
+                                    {data?.numberOfLectures}
+                                </div>
+                                <div className="text-xs text-gray-500">Lectures</div>
+                            </div>
+                        </div>
+                        
+                        <div className="flex items-center space-x-2">
+                            <div className="w-8 h-8 bg-accent-100 rounded-lg flex items-center justify-center">
+                                <FiClock className="w-4 h-4 text-accent-600" />
+                            </div>
+                            <div>
+                                <div className="text-sm font-semibold text-gray-800">
+                                    {Math.floor(Math.random() * 20) + 10}h
+                                </div>
+                                <div className="text-xs text-gray-500">Duration</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Level Badge */}
+                    <div className="flex items-center space-x-2 mb-6">
+                        <div className="w-8 h-8 bg-gold-100 rounded-lg flex items-center justify-center">
+                            <BsBarChart className="w-4 h-4 text-gold-600" />
+                        </div>
+                        <span className="text-sm font-medium text-gray-700">
+                            Beginner to Advanced
+                        </span>
+                    </div>
+
+                    {/* Action Button */}
+                    <button className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-semibold py-3 px-4 rounded-xl hover:from-primary-600 hover:to-secondary-600 transition-all duration-300 transform group-hover:scale-105 flex items-center justify-center space-x-2">
+                        <span>Explore Course</span>
+                        <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }
